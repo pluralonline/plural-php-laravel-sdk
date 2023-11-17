@@ -7,7 +7,7 @@ require_once __dir__ . '/../vendor/autoload.php';
 
 use \Pinelabs\Php\API;
 
-$callback_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http" . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . 'callback.php';
+$callback_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http" . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . 'Callback.php';
 
 
 if(isset($_POST['pay_now'])){
@@ -23,8 +23,12 @@ if(isset($_POST['pay_now'])){
     
     $products_data = [
         [
-            "product_code" => (isset($_POST['product_code']) && !empty($_POST['product_code'])) ? $_POST['product_code'] : '',
-            "product_amount" => (isset($_POST['product_amount']) && !empty($_POST['product_amount'])) ? $_POST['product_amount'] : ''
+            "product_code" => (isset($_POST['product_code1']) && !empty($_POST['product_code1'])) ? $_POST['product_code1'] : '',
+            "product_amount" => (isset($_POST['product_amount1']) && !empty($_POST['product_amount1'])) ? $_POST['product_amount1'] : ''
+        ],
+        [
+            "product_code" => (isset($_POST['product_code2']) && !empty($_POST['product_code2'])) ? $_POST['product_code2'] : '',
+            "product_amount" => (isset($_POST['product_amount2']) && !empty($_POST['product_amount2'])) ? $_POST['product_amount2'] : ''
         ]
     ];
 
@@ -144,8 +148,9 @@ if(isset($_POST['pay_now'])){
                 <div class="text-center"> 
                     <p class="mb-0">Check Fetch and EMI API Response</p>
                     <div class="col-md-12 text-center">
-                        <a href="<?= $_SERVER['REQUEST_URI'] ?>OtherApi.php?fetch" target="_blank">Fetch Order details </a> | 
-                        <a target="_blank" href="<?= $_SERVER['REQUEST_URI'] ?>OtherApi.php?emi"> Fetch EMI Offers</a>
+                        <a href="<?= $_SERVER['REQUEST_URI'] ?>Fetch.php" target="_blank">Fetch Order </a> | 
+                        <a target="_blank" href="<?= $_SERVER['REQUEST_URI'] ?>Emi.php"> Fetch EMI </a> |
+                        <a href="<?= $_SERVER['REQUEST_URI'] ?>Hash.php" target="_blank">Hash Verification </a> 
                     </div>  
                 </div>
             </div> 
@@ -154,19 +159,19 @@ if(isset($_POST['pay_now'])){
                 <div class="col-md-6 col-lg-12">
                     <form method="post" class="needs-validation" novalidate>
                         <div class="row g-3">
-                            <div class="col-sm-6">
+                        <div class="col-sm-6">
                                 <label for="mid" class="form-label">Merchant ID</label>
-                                <input type="text" name="merchant_id" class="form-control" id="mid" placeholder="Merchant ID" value="106600" required>
+                                <input type="text" name="merchant_id" class="form-control" id="mid" placeholder="Merchant ID" value="106598" required>
                             </div>
 
                             <div class="col-sm-6">
                                 <label for="access_code" class="form-label">Access Code</label>
-                                <input type="text" name="access_code" class="form-control" id="access_code" placeholder="API Access Code" value="bcf441be-411b-46a1-aa88-c6e852a7d68c" required>
+                                <input type="text" name="access_code" class="form-control" id="access_code" placeholder="API Access Code" value="4a39a6d4-46b7-474d-929d-21bf0e9ed607" required>
                             </div>
 
                             <div class="col-sm-6">
                                 <label for="secret" class="form-label">Secret</label>
-                                <input type="text" name="secret" class="form-control" id="secret" placeholder="Secret" value="9A7282D0556544C59AFE8EC92F5C85F6" required>
+                                <input type="text" name="secret" class="form-control" id="secret" placeholder="Secret" value="55E0F73224EC458A8EC0B68F7B47ACAE" required>
                             </div>
 
                             <div class="col-sm-6">
@@ -194,12 +199,22 @@ if(isset($_POST['pay_now'])){
 
                             <div class="col-sm-3">
                                 <label for="product_code" class="form-label">Product Code</label>
-                                <input type="text" name="product_code" class="form-control" id="product_code" placeholder="Product Code" value="testproduct02" required>
+                                <input type="text" name="product_code1" class="form-control" id="product_code1" placeholder="Product Code" value="testSKU1" required>
                             </div>
 
                             <div class="col-sm-3">
                                 <label for="product_amount" class="form-label">Product Amount</label>
-                                <input type="text" name="product_amount" class="form-control" id="product_amount" placeholder="Product Amount" value="10000" required>
+                                <input type="text" name="product_amount1" class="form-control" id="product_amount1" placeholder="Product Amount" value="2000000" required>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="product_code" class="form-label">Product Code</label>
+                                <input type="text" name="product_code2" class="form-control" id="product_code2" placeholder="Product Code" value="testSKU2" required>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="product_amount" class="form-label">Product Amount</label>
+                                <input type="text" name="product_amount2" class="form-control" id="product_amount2" placeholder="Product Amount" value="2000000" required>
                             </div>
 
                             <div class="col-sm-6">

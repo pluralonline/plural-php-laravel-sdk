@@ -37,7 +37,7 @@ class Hash extends API
 
     public function Verify(string $receiveHash, array $request){
         ksort($request);
-
+        
         $dataString = "";
 
         foreach ($request as $key => $value)

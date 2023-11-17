@@ -11,7 +11,7 @@ $isTestMode = true;
 
 $api = new API($merchantId, $apiAccessCode, $secret, $isTestMode);
 
-echo '<pre>'; print_r($_POST);
+echo '<pre>' . json_encode($_POST, JSON_PRETTY_PRINT) . '</pre>';
 
 $receviedHash = $_POST['dia_secret'] ?? '';
 
