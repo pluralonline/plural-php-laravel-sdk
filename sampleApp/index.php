@@ -7,7 +7,7 @@ require_once __dir__ . '/../vendor/autoload.php';
 
 use \Pinelabs\Php\API;
 
-$callback_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http" . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . 'Callback.php';
+$callback_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http" . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . 'callback.php';
 
 
 if(isset($_POST['pay_now'])){
@@ -21,17 +21,11 @@ if(isset($_POST['pay_now'])){
     $callback = (isset($_POST['callback_url']) && !empty($_POST['callback_url'])) ? $_POST['callback_url'] : '';
     $amount_in_paisa = (isset($_POST['amount_in_paisa']) && !empty($_POST['amount_in_paisa'])) ? $_POST['amount_in_paisa'] : ''; // amount in paisa
     
-    $products_data = [
-        [
-            "product_code" => (isset($_POST['product_code1']) && !empty($_POST['product_code1'])) ? $_POST['product_code1'] : '',
-            "product_amount" => (isset($_POST['product_amount1']) && !empty($_POST['product_amount1'])) ? $_POST['product_amount1'] : ''
-        ],
-        [
-            "product_code" => (isset($_POST['product_code2']) && !empty($_POST['product_code2'])) ? $_POST['product_code2'] : '',
-            "product_amount" => (isset($_POST['product_amount2']) && !empty($_POST['product_amount2'])) ? $_POST['product_amount2'] : ''
-        ]
-    ];
-
+    // product_details
+    $temp=$_POST['product_details'];
+    if(strlen($temp) !== 0){
+    $products_data = json_decode($temp, true);
+    }
     $payment_modes = [
         'cards' => (isset($_POST['payment_mode']) && in_array('card', $_POST['payment_mode'])) ? true : false,
         'netbanking' => (isset($_POST['payment_mode']) && in_array('netbanking', $_POST['payment_mode'])) ? true : false,
@@ -148,9 +142,9 @@ if(isset($_POST['pay_now'])){
                 <div class="text-center"> 
                     <p class="mb-0">Check Fetch and EMI API Response</p>
                     <div class="col-md-12 text-center">
-                        <a href="<?= $_SERVER['REQUEST_URI'] ?>Fetch.php" target="_blank">Fetch Order </a> | 
-                        <a target="_blank" href="<?= $_SERVER['REQUEST_URI'] ?>Emi.php"> Fetch EMI </a> |
-                        <a href="<?= $_SERVER['REQUEST_URI'] ?>Hash.php" target="_blank">Hash Verification </a> 
+                        <a href="<?= $_SERVER['REQUEST_URI'] ?>Fetch.php">Fetch Order </a> | 
+                        <a href="<?= $_SERVER['REQUEST_URI'] ?>Emi.php"> Fetch EMI </a> |
+                        <a href="<?= $_SERVER['REQUEST_URI'] ?>Hash.php" >Hash Verification </a> 
                     </div>  
                 </div>
             </div> 
@@ -189,7 +183,7 @@ if(isset($_POST['pay_now'])){
 
                             <div class="col-sm-3">
                                 <label for="amount" class="form-label">Amount (In Paisa)</label>
-                                <input type="text" name="amount_in_paisa" class="form-control" id="amount" placeholder="Amount (In Paisa)" value="1000" required>
+                                <input type="text" name="amount_in_paisa" class="form-control" id="amount" placeholder="Amount (In Paisa)" value="4000000" required>
                             </div>
 
                             <div class="col-sm-6">
@@ -197,25 +191,10 @@ if(isset($_POST['pay_now'])){
                                 <input type="text" name="callback_url" class="form-control" id="callback_url" placeholder="Callback URL" value="<?php echo $callback_url ?>" required>
                             </div>
 
-                            <div class="col-sm-3">
-                                <label for="product_code" class="form-label">Product Code</label>
-                                <input type="text" name="product_code1" class="form-control" id="product_code1" placeholder="Product Code" value="testSKU1" required>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="product_amount" class="form-label">Product Amount</label>
-                                <input type="text" name="product_amount1" class="form-control" id="product_amount1" placeholder="Product Amount" value="2000000" required>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="product_code" class="form-label">Product Code</label>
-                                <input type="text" name="product_code2" class="form-control" id="product_code2" placeholder="Product Code" value="testSKU2" required>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="product_amount" class="form-label">Product Amount</label>
-                                <input type="text" name="product_amount2" class="form-control" id="product_amount2" placeholder="Product Amount" value="2000000" required>
-                            </div>
+                            <div class="col-sm-9">
+                                    <label for="response_data" class="form-label">Product Details</label>
+                                    <textarea name="product_details" id="product_details" class="form-control" rows="6" >[{"product_code":"testSKU1","product_amount":"2000000"},{"product_code":"testSKU2","product_amount":"2000000"}]</textarea>
+                                </div>
 
                             <div class="col-sm-6">
                                 <label for="callback_url" class="form-label">Payment Mode</label>

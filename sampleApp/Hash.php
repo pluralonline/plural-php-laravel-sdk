@@ -44,7 +44,7 @@ if (!empty($_POST['access_code']) && !empty($_POST['merchant_id']) && !empty($_P
         echo '<h4 style="color:green">Hash Varification Success</h4>'; die;
     }
     else{
-        echo '<h4 style="color:red">Hash Varification Faild</h4>'; die;
+        echo '<h4 style="color:red">Hash Varification Failed</h4>'; die;
     }
 }
 
@@ -91,9 +91,9 @@ if (!empty($_POST['access_code']) && !empty($_POST['merchant_id']) && !empty($_P
                 <h2>Hash Verification Form</h2>
                 <div class="text-center"> 
                     <div class="col-md-12 text-center">
-                        <a href="./" target="_blank"> Home </a> | 
-                        <a href="./Fetch.php" target="_blank">Fetch Order </a> | 
-                        <a href="./Emi.php" target="_blank"> Fetch EMI </a>
+                        <a href="./" > Home </a> | 
+                        <a href="./Fetch.php" >Fetch Order </a> | 
+                        <a href="./Emi.php" > Fetch EMI </a>
                     </div>  
                 </div>
             </div>

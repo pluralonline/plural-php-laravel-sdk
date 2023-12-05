@@ -79,9 +79,9 @@ if (!empty($_POST['access_code']) && !empty($_POST['merchant_id']) && !empty($_P
                 <h2>Fetch Order Form</h2>
                 <div class="text-center"> 
                     <div class="col-md-12 text-center">
-                        <a href="./" target="_blank"> Home </a> | 
-                        <a href="./Emi.php" target="_blank"> Fetch EMI </a> | 
-                        <a href="./Hash.php" target="_blank"> Hash Verification </a> 
+                        <a href="./"> Home </a> | 
+                        <a href="./Emi.php"> Fetch EMI </a> | 
+                        <a href="./Hash.php" > Hash Verification </a> 
                     </div>  
                 </div>
             </div>

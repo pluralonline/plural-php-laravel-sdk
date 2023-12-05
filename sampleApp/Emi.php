@@ -16,16 +16,10 @@ if (!empty($_POST['access_code']) && !empty($_POST['merchant_id']) && !empty($_P
 
     $txn_data['amount_in_paisa'] = (isset($_POST['amount_in_paisa']) && !empty($_POST['amount_in_paisa'])) ? $_POST['amount_in_paisa'] : ''; // amount in paisa
 
-    $products_data = [
-        [
-            "product_code" => (isset($_POST['product_code1']) && !empty($_POST['product_code1'])) ? $_POST['product_code1'] : '',
-            "product_amount" => (isset($_POST['product_amount1']) && !empty($_POST['product_amount1'])) ? $_POST['product_amount1'] : ''
-        ],
-        [
-            "product_code" => (isset($_POST['product_code2']) && !empty($_POST['product_code2'])) ? $_POST['product_code2'] : '',
-            "product_amount" => (isset($_POST['product_amount2']) && !empty($_POST['product_amount2'])) ? $_POST['product_amount2'] : ''
-        ]
-    ];
+    $temp=$_POST['product_details'];
+    if(strlen($temp) !== 0){
+    $products_data = json_decode($temp, true);
+    }
 
     $api = new API($merchantId, $apiAccessCode, $secret, $isTestMode);
 
@@ -89,9 +83,9 @@ if (!empty($_POST['access_code']) && !empty($_POST['merchant_id']) && !empty($_P
                 <h2>EMI Form</h2>
                 <div class="text-center"> 
                     <div class="col-md-12 text-center">
-                        <a href="./" target="_blank"> Home </a> | 
-                        <a href="./Fetch.php" target="_blank">Fetch Order </a> | 
-                        <a href="./Hash.php" target="_blank">Hash Verification </a> 
+                        <a href="./" > Home </a> | 
+                        <a href="./Fetch.php" >Fetch Order </a> | 
+                        <a href="./Hash.php" >Hash Verification </a> 
                     </div>  
                 </div>
             </div>
@@ -128,24 +122,9 @@ if (!empty($_POST['access_code']) && !empty($_POST['merchant_id']) && !empty($_P
                                 <input type="text" name="amount_in_paisa" class="form-control" id="amount" placeholder="Amount (In Paisa)" value="4000000" required>
                             </div>
 
-                            <div class="col-sm-3">
-                                <label for="product_code" class="form-label">Product Code</label>
-                                <input type="text" name="product_code1" class="form-control" id="product_code1" placeholder="Product Code" value="testSKU1" required>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="product_amount" class="form-label">Product Amount</label>
-                                <input type="text" name="product_amount1" class="form-control" id="product_amount1" placeholder="Product Amount" value="2000000" required>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="product_code" class="form-label">Product Code</label>
-                                <input type="text" name="product_code2" class="form-control" id="product_code2" placeholder="Product Code" value="testSKU2" required>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <label for="product_amount" class="form-label">Product Amount</label>
-                                <input type="text" name="product_amount2" class="form-control" id="product_amount2" placeholder="Product Amount" value="2000000" required>
+                            <div class="col-sm-12">
+                                    <label for="response_data" class="form-label">Product Details</label>
+                                    <textarea name="product_details" id="product_details" class="form-control" rows="6" >[{"product_code":"testSKU1","product_amount":"2000000"},{"product_code":"testSKU2","product_amount":"2000000"}]</textarea>
                             </div>
 
                         </div>
