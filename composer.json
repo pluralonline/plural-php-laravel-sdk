@@ -1,17 +1,20 @@
 {
-    "name": "ramsh/php-sdk",
+    "name": "pinelabs/php",
+    "description": "Pinelabs PHP library to enable Payments Collection",
+    "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Ramsh\\PhpSdk\\": "src/"
+            "Pinelabs\\Php\\": "src/"
         }
     },
-    "repositories": [
+    "authors": [
         {
-            "type": "path",
-            "url": "./pinelab-php-sdk"
+            "name": "Pinelabs"
         }
     ],
-    "require": {
-    "pinelabs/php":"@dev"
-}
+    "minimum-stability": "dev",
+    "require-dev": {
+        "laravel/pint": "dev-main"
+    }
 }

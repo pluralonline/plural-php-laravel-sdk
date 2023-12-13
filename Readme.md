@@ -6,67 +6,13 @@ Read up here for getting started and understanding the payment flow.
 - A minimum of PHP 7.4 upto 8.1
 
 
-### Installation 
+## Installation
+
+-   If your project using composer, run the below command
 
 ```
-    If your project uses Composer for managing dependencies, you can easily install the PHP library by following these steps:
-    Open your terminal or command prompt.
-    Navigate to your project's root directory where your `composer.json` file is located.
-    Run the following Composer command to install the PHP library:
-    “composer require pinelabs/php”
+composer require pinelabs/php
 ```
-
-```
-To locally add a PHP library to your composer.json file, follow these steps:
-Download the PHP library and place it in a directory within your project. You can obtain the library files from a source like GitHub, or by downloading a release archive.
-In your PHP library, make sure it has an autoloading mechanism defined, usually within a composer.json file. This is important to ensure that Composer can autoload the library's classes. An example composer.json file for the library might look like this:
-```
-
-```
-{
-    "name": "vendor-name/library-name",
-    "autoload": {
-        "psr-4": {
-            "VendorName\\LibraryName\\": "src/"
-        }
-    }
-}
-```
-
-Open your project's composer.json file and add a reference to the locally downloaded library. To do this, you can use the path repository type. Add a repositories section and specify the local path to the library, like this:
-
-```
-{
-    "repositories": [
-        {
-            "type": "path",
-            "url": "relative/path/to/library"
-        }
-    ],
-    "require": {
-        "vendor-name/library-name": "*"
-    }
-}
-```
-
-Example file using pinelab sdk
-
-```
-"repositories": [
-        {
-            "type": "path",
-            "url": "./pinelab-sdk",
-        }
-    ],
-    "require": {
-        "pinelabs/php":"@dev"
-    }
-```
-
-Replace "relative/path/to/library" with the actual path to the directory where the library is located within your project.
-After updating your project's composer.json file, open your terminal or command prompt, navigate to your project's root directory (where the composer.json file is located), and run:
-composer update
-The composer will update the composer.lock file and autoload your locally added library.
 
 
 ### Note:
@@ -228,17 +174,17 @@ echo '<pre>'; print_r($response); die;
 
 Success Response
 ``` php
-{"status":true,"token":"S01P3444qQM33XTlDJxg70bAj9II6AELtgU%2fNsFddGulYw%3d","redirect_url":"https://uat.pinepg.in/pinepg/v2/process/payment?token=S01P3444qQM33XTlDJxg70bAj9II6AELtgU%2fNsFddGulYw%3d"}
+Array
+(
+    [status] => 1
+    [redirect_url] => https://uat.pinepg.in/pinepg/v2/process/payment?token=S01wPSlIH%2bopelRVif7m7e4SgrTRIcKYx25YDYfmgtbPOE%3d
+)
 ```
 
 Failure Response : 
 
 ``` php
-Array ( 
-    [status] => false
-    [message] => Something went wrong 
-    [respone_code] => -1 
- )
+Fatal error: Uncaught Exception: MERCHANT PASSWORD DOES NOT MATCH
 ```
 
 
@@ -274,11 +220,7 @@ Success Response
 
 Failure Response 
 ```php
-{
-"Status":false,
-"message":"INVALID DATA",
-"respone_code":"-40"
-}
+Fatal error: Uncaught Exception: INVALID DATA
 ```
 
 IF Merchant Details Incorrect Then Return Response
@@ -331,11 +273,7 @@ Success Response
 
 Failure Response 
 ```php
-{
-    "status":false,
-    "message":"Something went wrong",
-    "respone_code":-40
-}
+Fatal error: Uncaught Exception: INVALID DATA,MISMATCH_IN_TOTAL_CART_AMOUNT_AND_TOTAL_PRODUCT_AMOUNT
 ```
 
 
