@@ -1,4 +1,4 @@
-# PHP SDK
+# PHP Laravel SDK
 
 Read up here for getting started and understanding the payment flow.
 
