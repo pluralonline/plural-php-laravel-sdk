@@ -1,9 +1,13 @@
 # PHP Laravel SDK
 
-Read up here for getting started and understanding the payment flow.
+Read up here to get started and understand the payment flow.
+
+PHP Integration Guide: https://youtu.be/8n43-5REBQY?si=7BoAKlO5Yw2X4BYg
+
+Sample app: https://github.com/pluralonline/plural-php-laravel-sdk-sampleapp
 
 ### Prerequisites
-- A minimum of PHP 7.4 upto 8.1
+- A minimum of PHP 7.4 up to 8.1
 
 
 ## Installation
@@ -34,9 +38,9 @@ Supported Features
 - EMI Calculator
 - Hash Verification
 
-####  Only Non Seamless Integration Api Supported
+####  Only Non-Seamless Integration API Supported
 
-    This sdk only supports non seamless integration, by non seamless we mean the the use will alway need to redirect the end user to payment gateways where he'll select his preferred payment method and complete payment.
+    This SDK only supports nonseamless integration, by nonseamless we mean the merchant will always need to redirect the end user to payment gateways where he'll select his preferred payment method and complete payment.
 
 
 
@@ -107,7 +111,7 @@ $shipping_data = [
     'first_name' => 'Ramsharan',  // Optional 
     'last_name' => 'Yadav',  // Optional 
     'mobile_no' => '7737291210',  // Optional 
-    'address1' => 'mcsam',  // Optional 
+    'address1' => 'somewhere',  // Optional 
     'address2' => 'mm tower',  // Optional 
     'address3' => 'sector 18',  // Optional 
     'pincode' => '122018',  // Optional 
@@ -143,7 +147,7 @@ $payment_modes = [
 ];
 // Mandatory 
 
-// In these payment modes, the merchant can choose multiple modes which should be enabled on his merchant ID.
+// In these payment modes, the merchant can choose multiple modes that should be enabled on his merchant ID.
 
 ```
 
@@ -197,7 +201,7 @@ Order Id ( Mandatory )
 ```php
 $orderId = "orderId12345";
 
-// The order ID which was sent by the user as unique transaction ID while creating the order will be passed here.
+// The order ID which was sent by the user as a unique transaction ID while creating the order will be passed here.
 ```
 
 #
@@ -288,7 +292,7 @@ $receviedHash = "475373549378937GJDFJGD8456834XCJBXJ4538VB67485";
 // The hash received in response from Pinelabs.
 ```
 
-Response Send In verify request for create a new hash ( Mandatory )
+Response Send In verify the request to create a new hash ( Mandatory )
 
 ```php
 
